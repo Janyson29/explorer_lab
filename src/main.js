@@ -45,7 +45,7 @@ const expirationDatePattern = {
 }
 const expirationDateMasked = IMask(expirationDate, expirationDatePattern);
 
-const cardNumber = document.querySelector("card-number");
+const cardNumber = document.querySelector("#card-number");
 const cardNumberPattern = {
   mask: [
     {
@@ -80,6 +80,6 @@ addButton.addEventListener("click", () => {
   console.log("Opa, você clicou no botão!")
 });
 
-document.querySelector("form").addEventListener("submit", (Event) => {
-  Event.preventDefault()
+document.querySelector("form").addEventListener("submit", (event) => {
+  event.preventDefault()
 });
