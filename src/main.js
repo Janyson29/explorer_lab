@@ -75,7 +75,7 @@ const cardNumberPattern = {
     {
       mask: "0000 0000 0000 0000",
       regex: /^(?:5[0678]\d{0,2}|6304|67\d{0,2})\d{0,12}/,
-      cardtype: "maestro",
+      cardType: "maestro",
     },
     {
       mask: "0000 0000 0000 0000",
