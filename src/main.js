@@ -9,10 +9,12 @@ function setCardType(type) {
   const colors = {
     visa: ["#436D99", "#2D57F2"],
     mastercard: ["#DF6F29", "#C69347"],
-    paysandu: ["#018890", "#24FFF2"],
+    paysandu: ["none", "none"],
     american: ["darkgray", "darkgray"],
-    //maestro: ["cornflowerblue", "cornflowerblue"],
-    default: ["black", "gray"],
+    discover: ["#00A4E0", "#EF4123"],
+    maestro: ["cornflowerblue", "cornflowerblue"],
+    jcb: ["#00823f", "#bb1933"],
+    default: ["none", "none"],
   }
   ccBgColor01.setAttribute("fill", colors[type][0]);
   ccBgColor02.setAttribute("fill", colors[type][1]);
@@ -70,11 +72,21 @@ const cardNumberPattern = {
       regex: /^3[47]\d{0,13}/,
       cardType: "american",
     },
-    /*{
+    {
       mask: "0000 0000 0000 0000",
       regex: /^(?:5[0678]\d{0,2}|6304|67\d{0,2})\d{0,12}/,
       cardtype: "maestro",
-    },*/
+    },
+    {
+      mask: "0000 0000 0000 0000",
+      regex: /^(?:6011|65\d{0,2}|64[4-9]\d?)\d{0,12}/,
+      cardType: "discover",
+    },
+    {
+      mask: "0000 0000 0000 0000",
+      regex: /^(?:35\d{0,2})\d{0,12}/,
+      cardType: "jcb",
+    },
     {
       mask: "0000 0000 0000 0000",
       cardType: "default",
@@ -94,7 +106,18 @@ const cardNumberMasked = IMask(cardNumber, cardNumberPattern);
 
 const addButton = document.querySelector("#add-card");
 addButton.addEventListener("click", () => {
-  alert("Cartão Adicionado!")
+  if (
+    cardHolder.value.length === 0 ||
+    cardNumber.value.length === 0 ||
+    expirationDate.value.length === 0 ||
+    securityCode.value.length === 0
+  ) {
+    return alert(
+      "Nenhum cartão adicionado. Por favor preencha os campos corretamente!"
+    )
+  } else {
+    return alert("Cartão adicionado!")
+  }
 });
 
 document.querySelector("form").addEventListener("submit", (event) => {
